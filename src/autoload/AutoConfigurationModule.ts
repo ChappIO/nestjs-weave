@@ -33,7 +33,7 @@ export class AutoConfigurationModule {
     );
 
     ifPackageIsInstalled(
-      ["prom-client", "typeorm"],
+      ["prom-client", "@nestjs/typeorm", "typeorm"],
       log,
       "TypeORM metrics collection",
       () => {

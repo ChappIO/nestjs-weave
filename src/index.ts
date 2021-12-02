@@ -1,1 +1,2 @@
-export {NestWeaver} from "./NestWeaver"
+export { NestWeaver } from "./NestWeaver";
+export { WeaveApplicationOptions } from "./ApplicationModule";
