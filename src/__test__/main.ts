@@ -1,14 +1,33 @@
 import { NestWeaver } from "../NestWeaver";
-import { Module } from "@nestjs/common";
+import { Injectable, Module } from "@nestjs/common";
 import { TypeOrmModule, TypeOrmModuleOptions } from "@nestjs/typeorm";
 import { ConfigService } from "@nestjs/config";
 import { Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Gauge, Registry } from "prom-client";
 
 
 @Entity("other_name")
 export class SimpleEntity {
   @PrimaryGeneratedColumn()
   public id: number;
+}
+
+@Injectable()
+export class CustomMetricsService {
+  constructor(registry: Registry) {
+    new Gauge({
+      registers: [registry],
+      labelNames: ["name"],
+      name: "random_number",
+      help: "A random number",
+      async collect() {
+        this.inc(
+          { name: "test" },
+          Math.round(Math.random() * 100)
+        );
+      }
+    });
+  }
 }
 
 @Module({
@@ -25,6 +44,9 @@ export class SimpleEntity {
       })
     }),
     TypeOrmModule.forFeature([SimpleEntity])
+  ],
+  providers: [
+    CustomMetricsService
   ]
 })
 class AppModule {

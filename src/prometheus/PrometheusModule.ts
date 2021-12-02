@@ -1,9 +1,11 @@
-import { Module } from "@nestjs/common";
+import { Global, Module } from "@nestjs/common";
 import { collectDefaultMetrics, Registry } from "prom-client";
 import { MetricsController } from "./MetricsController";
 import { APP_INTERCEPTOR } from "@nestjs/core";
 import { RequestMetricsCollector } from "./RequestMetricsCollector";
+import { UptimeMetricCollector } from "./UptimeMetricCollector";
 
+@Global()
 @Module({
   providers: [
     {
@@ -14,12 +16,13 @@ import { RequestMetricsCollector } from "./RequestMetricsCollector";
           register: register
         });
         return register;
-      }
+      },
     },
     {
       provide: APP_INTERCEPTOR,
       useClass: RequestMetricsCollector
-    }
+    },
+    UptimeMetricCollector,
   ],
   controllers: [MetricsController],
   exports: [Registry]
