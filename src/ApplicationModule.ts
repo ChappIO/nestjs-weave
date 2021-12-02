@@ -1,6 +1,7 @@
 import { DynamicModule, Module } from "@nestjs/common";
 import { ConfigFactory } from "@nestjs/config";
 import { ConfigurationModule } from "./config/ConfigurationModule";
+import { AutoConfigurationModule } from "./autoload/AutoConfigurationModule";
 
 export interface ApplicationOptions {
   configuration?: ConfigFactory[];
@@ -12,7 +13,8 @@ export class ApplicationModule {
     return {
       module: ApplicationModule,
       imports: [
-        ConfigurationModule.forRoot(options.configuration || [])
+        ConfigurationModule.forRoot(options.configuration || []),
+        AutoConfigurationModule.forRoot(),
       ]
     };
   }
