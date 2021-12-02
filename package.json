@@ -1,6 +1,6 @@
 {
   "name": "nestjs-weave",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "main": "dist/index.js",
   "repository": "git@github.com:ChappIO/nestjs-weave.git",
   "author": "Thomas Biesaart",
