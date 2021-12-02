@@ -5,11 +5,11 @@ function ifPackageIsInstalled(packageNames: string[], logger: Logger, descriptio
     for (let packageName of packageNames) {
       require.resolve(packageName);
     }
-    logger.log(`Found package "${packageNames.join("and")}": ${description} enabled`);
+    logger.log(`Found package "${packageNames.join(" and ")}": ${description} enabled`);
     register();
     return true;
   } catch (e) {
-    logger.log(`Package "${packageNames.join("and")}" not present: ${description} disabled`);
+    logger.log(`Package "${packageNames.join(" and ")}" not present: ${description} disabled`);
     return false;
   }
 }
@@ -21,6 +21,8 @@ export class AutoConfigurationModule {
     const imports: ModuleMetadata["imports"] = [];
 
     const log = new Logger("ModuleAutoLoader");
+
+
     ifPackageIsInstalled(
       ["prom-client"],
       log,
@@ -29,6 +31,17 @@ export class AutoConfigurationModule {
         imports.push(require("../prometheus/PrometheusModule").PrometheusModule);
       }
     );
+
+    ifPackageIsInstalled(
+      ["prom-client", "typeorm"],
+      log,
+      "TypeORM metrics collection",
+      () => {
+        imports.push(require("../typeorm-metrics/TypeORMMetricsModule").TypeORMMetricsModule);
+      }
+    );
+
+
     return {
       module: AutoConfigurationModule,
       imports
