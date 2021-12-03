@@ -1,12 +1,16 @@
 import { Controller, Get, Response } from '@nestjs/common';
 import { Registry } from 'prom-client';
 import { Response as ExpressResponse } from 'express';
+import {ConfigService} from "@nestjs/config";
 
-@Controller('internal')
+@Controller()
+@Reflect.metadata("swagger/apiUseTags", ["Internal"])
 export class MetricsController {
-  public constructor(private readonly register: Registry) {}
+  public constructor(private readonly register: Registry, private readonly config: ConfigService) {
+    Reflect.defineMetadata("path", config.get("internal.metrics.path"), MetricsController)
+  }
 
-  @Get('metrics')
+  @Get()
   public async getMetrics(
     @Response() response: ExpressResponse,
   ): Promise<void> {

@@ -11,10 +11,17 @@ export function loadDefaults(): ConfigObject {
       description: "Welcome to ${application.name}",
       version: "development"
     },
-    swagger: {
-      name: "${application.name}",
-      description: "${application.description}",
-      version: "${application.version}"
+    internal: {
+      path: "/internal",
+      swagger: {
+        path: "${internal.path}/swagger",
+        name: "${application.name}",
+        description: "${application.description}",
+        version: "${application.version}"
+      },
+      metrics: {
+        path: "${internal.path}/metrics"
+      }
     }
   };
 }

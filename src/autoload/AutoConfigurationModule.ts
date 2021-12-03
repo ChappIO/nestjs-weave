@@ -1,6 +1,6 @@
 import { DynamicModule, Logger, Module, ModuleMetadata } from "@nestjs/common";
 
-function ifPackageIsInstalled(packageNames: string[], logger: Logger, description: string, register: () => void) {
+export function ifPackageIsInstalled(packageNames: string[], logger: Logger, description: string, register: () => void) {
   try {
     for (let packageName of packageNames) {
       require.resolve(packageName);
@@ -19,7 +19,6 @@ export class AutoConfigurationModule {
   static forRoot(): DynamicModule {
 
     const imports: ModuleMetadata["imports"] = [];
-
     const log = new Logger("ModuleAutoLoader");
 
 

@@ -11,21 +11,23 @@
     "prepare": "install-peers"
   },
   "peerDependencies": {
-    "@nestjs/common": "^8.2.2",
-    "@nestjs/config": "^1.1.0",
-    "@nestjs/core": "^8.2.2",
-    "@nestjs/platform-express": "^8.2.3",
-    "reflect-metadata": "^0.1.13",
-    "rxjs": "^7.4.0",
-    "lodash.set": "^4.3.2"
+    "@nestjs/common": "^8.x",
+    "@nestjs/config": "^1.x",
+    "@nestjs/core": "^8.x",
+    "@nestjs/platform-express": "^8.x",
+    "lodash.set": "^4.x",
+    "reflect-metadata": "^0.x",
+    "rxjs": "^7.x"
   },
   "devDependencies": {
+    "@nestjs/swagger": "^5.1.5",
     "@nestjs/typeorm": "^8.0.2",
     "@types/lodash": "^4.14.177",
     "@types/node": "^16.11.11",
     "install-peers-cli": "^2.2.0",
     "pg": "^8.7.1",
     "prom-client": "^14.0.1",
+    "swagger-ui-express": "^4.2.0",
     "ts-node": "^10.4.0",
     "typeorm": "^0.2.41",
     "typescript": "^4.5.2"

@@ -1,22 +1,23 @@
-import { DynamicModule, Module } from "@nestjs/common";
-import { ConfigFactory } from "@nestjs/config";
-import { ConfigurationModule } from "./config/ConfigurationModule";
-import { AutoConfigurationModule } from "./autoload/AutoConfigurationModule";
+import {DynamicModule, INestApplication, Module} from "@nestjs/common";
+import {ConfigFactory} from "@nestjs/config";
+import {ConfigurationModule} from "./config/ConfigurationModule";
+import {AutoConfigurationModule} from "./autoload/AutoConfigurationModule";
 
 export interface WeaveApplicationOptions {
-  configuration?: ConfigFactory[];
+    configuration?: ConfigFactory[];
+    onStart?: (app: INestApplication) => void | Promise<void>;
 }
 
 @Module({})
 export class ApplicationModule {
-  static forApp(module: any, options: WeaveApplicationOptions = {}): DynamicModule {
-    return {
-      module: ApplicationModule,
-      imports: [
-        ConfigurationModule.forRoot(options.configuration || []),
-        AutoConfigurationModule.forRoot(),
-        module,
-      ]
-    };
-  }
+    static forRoot(module: any, options: WeaveApplicationOptions = {}): DynamicModule {
+        return {
+            module: ApplicationModule,
+            imports: [
+                ConfigurationModule.forRoot(options.configuration || []),
+                AutoConfigurationModule.forRoot(),
+                module,
+            ]
+        };
+    }
 }
