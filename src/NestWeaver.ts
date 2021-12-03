@@ -23,7 +23,7 @@ export class NestWeaver {
 
     const app = await NestFactory.create<T>(
       ApplicationModule.forApp(module, { configuration }),
-      options
+      nestOptions
     );
 
     return app;

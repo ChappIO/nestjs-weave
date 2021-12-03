@@ -2,6 +2,7 @@ import { DynamicModule, Module } from "@nestjs/common";
 import { ConfigFactory, ConfigModule } from "@nestjs/config";
 import { loadEnv } from "./loadEnv";
 import { loadDefaults } from "./loadDefaults";
+import { buildTree } from "./buildTree";
 
 @Module({})
 export class ConfigurationModule {
@@ -16,9 +17,11 @@ export class ConfigurationModule {
           ignoreEnvVars: true,
           ignoreEnvFile: true,
           load: [
-            loadDefaults,
-            ...configuration,
-            loadEnv,
+            buildTree([
+              loadDefaults,
+              ...configuration,
+              loadEnv
+            ])
           ]
         })
       ]

@@ -56,6 +56,9 @@ class AppModule {
 NestWeaver.run(AppModule, {
   configuration: [
     () => ({
+      application: {
+        name: "Weave Tester"
+      },
       postgres: {
         host: "localhost",
         database: "postgres",

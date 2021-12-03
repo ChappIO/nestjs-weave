@@ -8,8 +8,13 @@ export function loadDefaults(): ConfigObject {
     },
     application: {
       name: "NestJS Application",
-      description: "Welcome to application",
+      description: "Welcome to ${application.name}",
       version: "development"
+    },
+    swagger: {
+      name: "${application.name}",
+      description: "${application.description}",
+      version: "${application.version}"
     }
   };
 }
