@@ -3,7 +3,6 @@ import {INestApplication, Logger, NestApplicationOptions} from "@nestjs/common";
 import {ConfigService} from "@nestjs/config";
 import {ApplicationModule, WeaveApplicationOptions} from "./ApplicationModule";
 import {ifPackageIsInstalled} from "./autoload/AutoConfigurationModule";
-import {MetricsController} from "./prometheus/MetricsController";
 
 export class NestWeaver {
     public static async run<T extends INestApplication = INestApplication>(module: any, options: NestApplicationOptions & WeaveApplicationOptions = {}): Promise<void> {

@@ -22,6 +22,13 @@ export function loadDefaults(): ConfigObject {
       metrics: {
         path: "${internal.path}/metrics"
       }
+    },
+    typeorm: {
+      connection: {
+        applicationName: "${application.name}",
+        synchronize: true,
+        autoLoadEntities: true,
+      }
     }
   };
 }

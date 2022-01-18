@@ -21,7 +21,6 @@ export class AutoConfigurationModule {
     const imports: ModuleMetadata["imports"] = [];
     const log = new Logger("ModuleAutoLoader");
 
-
     ifPackageIsInstalled(
       ["prom-client"],
       log,
@@ -39,7 +38,6 @@ export class AutoConfigurationModule {
         imports.push(require("../typeorm-metrics/TypeORMMetricsModule").TypeORMMetricsModule);
       }
     );
-
 
     return {
       module: AutoConfigurationModule,

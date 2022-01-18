@@ -21,9 +21,14 @@ function toDotNotation(source, prefix): Record<string, any> {
 }
 
 function expandVariables(dotNotated: Record<string, any>, path: string): string {
-  return dotNotated[path].replace(/\${([^}]+)}/g, (a, b, c, d) => {
-    return expandVariables(dotNotated, b) || "";
-  })
+  const value = dotNotated[path];
+  if(typeof value === 'string') {
+    return value.replace(/\${([^}]+)}/g, (a, b) => {
+      return expandVariables(dotNotated, b) || "";
+    })
+  } else {
+    return value;
+  }
 }
 
 export function buildTree(configurations: ConfigFactory[]): ConfigFactory {
